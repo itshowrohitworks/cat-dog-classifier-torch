@@ -26,14 +26,14 @@ class CatDogCNN(nn.Module):
         )
         """
         till here the output shape: 
-        128 x 28 x 28
+        128 x 128
         """
 
 
         # Linear Layer: Flatten Layer
         self.classifier = nn.Sequential(
             
-            # input shape: 128 x 28 x 28
+            # input shape: 128 x 128
 
             nn.Flatten(),
 
