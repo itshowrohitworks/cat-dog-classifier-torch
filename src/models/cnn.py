@@ -21,6 +21,8 @@ class CatDogCNN(nn.Module):
             nn.Conv2d(in_channels=64,out_channels=128,kernel_size=3,padding=1),
             nn.ReLU(),
             nn.MaxPool2d(2),
+
+            nn.AdaptiveAvgPool2d(output_size=(1,1))
         )
         """
         till here the output shape: 
@@ -35,13 +37,13 @@ class CatDogCNN(nn.Module):
 
             nn.Flatten(),
 
-            nn.Linear(in_features=128 * 28 * 28,out_features=512),
+            nn.Linear(in_features=128,out_features=128),
             nn.ReLU(),
 
             # Dropout: regularization technique -> to prevent overfitting during training
             nn.Dropout(p=0.5),
 
-            nn.Linear(in_features=512,out_features=2)
+            nn.Linear(in_features=128,out_features=2)
         )
         """
         till here the output:
@@ -50,7 +52,7 @@ class CatDogCNN(nn.Module):
         """
     
     def forward(self,x):
-        
+
         x = self.features(x)
 
         x = self.classifier(x)
