@@ -26,7 +26,7 @@ class CatDogCNN(nn.Module):
         )
         """
         till here the output shape: 
-        128 x 128
+        batch_size, 128, 1, 1
         """
 
 
