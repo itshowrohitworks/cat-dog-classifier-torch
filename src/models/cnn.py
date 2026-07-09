@@ -32,10 +32,9 @@ class CatDogCNN(nn.Module):
 
         # Linear Layer: Flatten Layer
         self.classifier = nn.Sequential(
-            
-            # input shape: 128 x 128
 
             nn.Flatten(),
+            # output shape: one vector of length 128
 
             nn.Linear(in_features=128,out_features=128),
             nn.ReLU(),
