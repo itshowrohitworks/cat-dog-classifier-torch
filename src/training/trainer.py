@@ -5,6 +5,7 @@ import torch.optim as optim
 from src.logger import logger
 from src.models.cnn import CatDogCNN
 from src.training.engine import train_one_epoch
+from src.training.tensorboard_logger import get_writer
 
 def train_model(
   train_loader,
@@ -26,6 +27,8 @@ def train_model(
         lr=learning_rate
     )
 
+    writer = get_writer()
+
     # trainig loop:
     for epoch in range(epochs):
 
@@ -39,10 +42,24 @@ def train_model(
             device=device
         )
 
+        writer.add_scalar(
+            "Loss/Train",
+            train_loss,
+            epoch,
+        )
+
+        writer.add_scalar(
+            "Accuracy/Train",
+            train_acc,
+            epoch,
+        )
+
         print(
             f"Epoch [{epoch+1}/{epochs}] "
             f"Loss: {train_loss:.4f} "
             f"Accuracy: {train_acc:.4f}"
         )
+        
+    writer.close()
     
     return model
