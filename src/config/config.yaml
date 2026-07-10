@@ -1,0 +1,28 @@
+dataset:
+
+  train_dir: data/train
+  test_dir: data/test
+
+  image_size: 224
+
+training:
+
+  batch_size: 32
+
+  epochs: 10
+
+  learning_rate: 0.001
+
+  num_workers: 0
+
+model:
+
+  num_classes: 2
+
+logging:
+
+  log_dir: logs
+
+checkpoint:
+
+  save_dir: models
