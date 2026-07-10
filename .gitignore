@@ -12,6 +12,9 @@ data/
 # Logs folder
 /logs
 
+# Runs folder
+/runs
+
 # Distribution / packaging
 .Python
 build/
