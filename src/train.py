@@ -4,14 +4,20 @@ from src.datasets.dataloader import create_dataloader
 from src.logger import logger
 from src.training.trainer import train_model
 
-def main():
+from src.config.config import load_config
 
-    train_dir = Path("data/train")
-    test_dir = Path("data/test")
+def main():
     
-    BATCH_SIZE = 32
-    IMG_SIZE = 224
-    EPOCHES = 10
+    config = load_config()
+
+    train_dir = Path(config["dataset"]["train_dir"])
+    test_dir = Path(config["dataset"]["test_dir"])
+
+    BATCH_SIZE = config["training"]["batch_size"]
+
+    IMG_SIZE = config["dataset"]["image_size"]
+
+    EPOCHES = config["training"]["epochs"]
 
     train_loader,test_loader,classes = create_dataloader(
         train_dir=train_dir,
@@ -25,7 +31,8 @@ def main():
     # Model:
     model = train_model(
         train_loader=train_loader,
-        epochs=EPOCHES
+        epochs=EPOCHES,
+        learning_rate=config["training"]["learning_rate"]
     )
 
     logger.info("Training Completed Successfully!")
